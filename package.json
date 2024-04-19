@@ -1,0 +1,42 @@
+{
+  "name": "node_ocr",
+  "version": "0.0.0",
+  "description": "nodejs tesseract-ocr",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "tesseract-ocr"
+  ],
+  "author": "Jean Shepherd",
+  "license": "MIT",
+  "dependencies": {
+    "@koa/cors": "^3.1.0",
+    "ajv": "^6.10.0",
+    "ajv-formats": "^2.1.1",
+    "app-module-path": "^2.2.0",
+    "cross-env": "^7.0.3",
+    "date-fns": "^2.30.0",
+    "exif-parser": "^0.1.12",
+    "koa": "^2.14.2",
+    "koa-body": "^4.1.0",
+    "koa-morgan": "^1.0.1",
+    "koa-router": "^7.4.0",
+    "lodash": "^4.17.21",
+    "mime": "^3.0.0",
+    "mongoose": "^8.3.0",
+    "require-dir": "^1.2.0",
+    "sharp": "^0.33.3",
+    "thunks": "^4.9.6"
+  },
+  "standard": {
+    "ignore": [
+      "**/*.min.js",
+      "node_modules/",
+      "test/",
+      "scripts/"
+    ]
+  }
+}
