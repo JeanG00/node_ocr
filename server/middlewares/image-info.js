@@ -69,10 +69,14 @@ module.exports = () => {
           const command = `${ocr.command} ${localFile} ${defaultFile} -l ${input.lang} --psm ${input.psm} --oem ${input.oem}`
           debug('ocr commmand', command)
           await exec(command)
-          result.content = await readFile(defaultFile)
         } catch (err) {
           result.ocr_err = err
           // throw ctx.createErr('OCRError', err)
+        }
+        try {
+          result.content = await readFile(defaultFile)
+        } catch (err) {
+          debug('file read', err.message)
         } finally {
           fs.unlink(defaultFile, () => {})
         }
