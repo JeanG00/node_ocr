@@ -3,7 +3,7 @@ const debug = require('debug')('app:middlewares:image')
 const fs = require('fs')
 const sharp = require('sharp')
 const ExifParser = require('exif-parser')
-const { exec, readFile, calculateMD5 } = require('server/utils')
+const { exec, readFile, calculateMD5, sleep } = require('server/utils')
 const { ocr } = require('conf')
 
 module.exports = () => {
@@ -74,11 +74,12 @@ module.exports = () => {
           // throw ctx.createErr('OCRError', err)
         }
         try {
-          result.content = await readFile(defaultFile)
+          await sleep(200)
+          result.content = await readFile(`${defaultFile}.txt`)
         } catch (err) {
           debug('file read', err.message)
         } finally {
-          fs.unlink(defaultFile, () => {})
+          fs.unlink(`${defaultFile}.txt`, () => {})
         }
         return result
       })

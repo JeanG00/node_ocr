@@ -44,3 +44,5 @@ exports.exec = (command) =>
       }
     })
   })
+
+exports.sleep = (milli = 1000) => setTimeout(() => {}, milli)
