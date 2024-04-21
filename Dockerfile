@@ -8,6 +8,8 @@ COPY ./assets/chi_sim.traineddata /usr/share/tesseract-ocr/5/tessdata/
 COPY ./assets/chi_tra.traineddata /usr/share/tesseract-ocr/5/tessdata/
 COPY ./assets/fra.traineddata /usr/share/tesseract-ocr/5/tessdata/
 
+RUN chmod 644 /usr/share/tesseract-ocr/5/tessdata/*.traineddata
+
 WORKDIR /root/app
 
 COPY . .

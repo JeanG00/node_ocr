@@ -47,15 +47,15 @@ module.exports = () => {
             input
           }
         } catch (err) {
-          console.error('sharp ########', err.message)
+          debug('#SHARP#', err.message)
         }
         try {
           const filedata = fs.readFileSync(localFile)
           const parser = ExifParser.create(filedata)
           const info = parser.parse()
-          console.log(info)
+          debug('PARSER', info)
         } catch (err) {
-          console.log('parser ########', err.message)
+          debug('#PARSER#', err.message)
         }
         let defaultFile = ocr.defaultFile
         try {
@@ -71,7 +71,8 @@ module.exports = () => {
           await exec(command)
           result.content = await readFile(defaultFile)
         } catch (err) {
-          throw ctx.createErr('OCRError', err)
+          result.ocr_err = err
+          // throw ctx.createErr('OCRError', err)
         } finally {
           fs.unlink(defaultFile, () => {})
         }
