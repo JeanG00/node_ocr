@@ -3,11 +3,18 @@ const debug = require('debug')('app:middlewares:image')
 const fs = require('fs')
 const sharp = require('sharp')
 const ExifParser = require('exif-parser')
+const { exec, readFile, calculateMD5 } = require('server/utils')
+const { ocr } = require('conf')
 
 module.exports = () => {
   return async (ctx, next) => {
-    // const suffix = _.get(ctx, 'request.body.suffix')
-    // const prefix = _.get(ctx, 'request.body.prefix')
+    const params = _.get(ctx, 'request.body') || {}
+    const input = {
+      ...params,
+      lang: params.lang || ocr.lang,
+      oem: params.oem || ocr.oem,
+      psm: params.psm || ocr.psm
+    }
     let files = _.result(ctx.request.files, 'file')
 
     if (_.isEmpty(files)) {
@@ -36,7 +43,8 @@ module.exports = () => {
               'hasProfile',
               'channels',
               'density'
-            ])
+            ]),
+            input
           }
         } catch (err) {
           console.error('sharp ########', err.message)
@@ -48,6 +56,24 @@ module.exports = () => {
           console.log(info)
         } catch (err) {
           console.log('parser ########', err.message)
+        }
+        let defaultFile = ocr.defaultFile
+        try {
+          const milli = new Date().getMilliseconds()
+          const hash = await calculateMD5(localFile)
+          defaultFile = `${milli}_${hash}`
+        } catch (err) {
+          console.log('MD5 file hash', err.message)
+        }
+        try {
+          const command = `${ocr.command} ${localFile} ${defaultFile} -l ${input.lang} --psm ${input.psm} --oem ${input.oem}`
+          debug('ocr commmand', command)
+          await exec(command)
+          result.content = await readFile(defaultFile)
+        } catch (err) {
+          throw ctx.createErr('OCRError', err)
+        } finally {
+          fs.unlink(defaultFile, () => {})
         }
         return result
       })

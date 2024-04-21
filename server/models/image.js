@@ -16,6 +16,7 @@ module.exports = function ({ Schema }) {
       ext: { type: String }, // .extension
       mime: { type: String }, // mime type
       content: { type: String }, // image text
+      input: { type: Object }, // params
       createdAt: {
         type: Date,
         expires: conf.loggerExpire,

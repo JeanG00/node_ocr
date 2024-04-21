@@ -14,13 +14,15 @@ standard --fix
 ## DOC
 
 - [tesseract](https://github.com/tesseract-ocr/tesseract/blob/main/doc/tesseract.1.asc)
+- [tesseract cmd](https://tesseract-ocr.github.io/tessdoc/Command-Line-Usage.html)
 
 ## Server config
 
-| ENV          | Values | group |
-| :----------- | :----- | :---- |
-| PORT         | 3000   | app   |
-| ROUTE_PREFIX | ''     | app   |
+| ENV          | Values                       | group |
+| :----------- | :--------------------------- | :---- |
+| PORT         | 3000                         | app   |
+| ROUTE_PREFIX | ''                           | app   |
+| MONGO_URL    | mongodb://127.0.0.1:27017/db | app   |
 
 ## Docker Build
 

@@ -7,9 +7,13 @@ module.exports = {
     zh: 'token 不合法',
     en: 'token 不合法'
   },
-  '40002.LoginError': {
-    zh: '手机号或密码错误，请确认后再登录',
-    en: '手机号或密码错误，请确认后再登录'
+  '40002.OCRError': {
+    zh: (fields) => {
+      return `OCR异常: ${fields}`
+    },
+    en: (fields) => {
+      return `OCR Exception: ${fields}`
+    }
   },
   '40003.ParamError': {
     zh: (fields) => {

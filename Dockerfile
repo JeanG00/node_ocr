@@ -4,6 +4,10 @@ ENV TZ=Asia/Shanghai
 
 RUN apt-get update && apt-get install -y libopencv-dev tesseract-ocr
 
+COPY ./assets/chi_sim.traineddata /usr/share/tesseract-ocr/5/tessdata/
+COPY ./assets/chi_tra.traineddata /usr/share/tesseract-ocr/5/tessdata/
+COPY ./assets/fra.traineddata /usr/share/tesseract-ocr/5/tessdata/
+
 WORKDIR /root/app
 
 COPY . .
