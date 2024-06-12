@@ -30,10 +30,10 @@ standard --fix
 # 1. login Ali registry
 docker login --username=your_name registry.cn-hangzhou.aliyuncs.com
 # 2. build image & push to registry
-docker buildx build --platform=linux/amd64,linux/arm64 --push -t registry.cn-hangzhou.aliyuncs.com/qingshou/node_ocr:v0.0.1 . --no-cache
+docker buildx build --platform=linux/amd64,linux/arm64 --push -t donacoo/node_ocr:v0.0.1 . --no-cache
 # 3. add tags 【CI Stage】
-docker tag registry.cn-hangzhou.aliyuncs.com/qingshou/node_ocr:v0.0.1 registry.cn-hangzhou.aliyuncs.com/qingshou/node_ocr:latest
-docker push registry.cn-hangzhou.aliyuncs.com/qingshou/node_ocr:latest
+docker tag donacoo/node_ocr:v0.0.1 donacoo/node_ocr:latest
+docker push donacoo/node_ocr:latest
 ```
 
 ## example 1
